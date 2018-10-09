@@ -1,2 +1,2 @@
 # ssr
-Server rendering
+Build server-side rendering with nodejs
