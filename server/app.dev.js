@@ -3,21 +3,28 @@ const app = new Koa();
 const path = require('path');
 const koaStatic = require('koa-static');
 const views = require('koa-views');
-const router = require('koa-router')(); 
+const Router = require('koa-router');
+const router = new Router();
+
 const assetMainifest = require(path.resolve(__dirname, '../build/asset-manifest.json'));
 app.use(koaStatic(path.resolve(__dirname, '../build')));
-
-router.get('*', async (ctx, next) => {
-    await ctx.render('index', {
-        title: 'Sample React App',
-        PUBLIC_URL: '/',
-        assetMainifest,
-    });
+app.on('error', (err, ctx) => {
+	console.log(err);
 });
-app.use(views(__dirname + '/views', {
-    extension: 'ejs'
-}));
+console.log(__dirname + '/views');
+app.use(
+	views(__dirname + '/views', {
+		extension: 'ejs'
+	})
+);
+router.get('*', async (ctx, next) => {
+	await ctx.render('index', {
+		title: 'ssr',
+		PUBLIC_URL: '',
+		assetMainifest
+	});
+	next();
+});
 app.use(router.routes());
-app.use(router.allowedMethods()); 
+app.use(router.allowedMethods());
 module.exports = app;
-
