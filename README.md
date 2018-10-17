@@ -9,5 +9,5 @@ Build server-side rendering with nodejs
 5. [koa2 + webpack 热更新](https://www.cnblogs.com/liuyt/p/7217024.html)
 
 ## Projects
-5. [react-next](https://github.com/react-love/react-next)
-6. [react-koa2-ssr](https://github.com/yangfan0095/react-koa2-ssr)
+1. [react-next](https://github.com/react-love/react-next)
+2. [react-koa2-ssr](https://github.com/yangfan0095/react-koa2-ssr)
