@@ -10,21 +10,29 @@ const webpackCfg = require('../config/webpack.config.dev');
 const compiler = webpack(webpackCfg);
 const webpackDevMiddlewareApply = require('./middlewares/webpackDev');
 const webpackHotMiddlewareApply = require('./middlewares/webpackHot');
+const assetsMiddleware = require('./middlewares/assetMainifest');
 const webpackDevMiddleware = require('webpack-dev-middleware')(compiler, {
 	noInfo: true,
-	publicPath: webpackCfg.output.publicPath,
+	publicPath: webpackCfg.output.publicPath
 });
 const webpackHotMiddleware = require('webpack-hot-middleware')(compiler, {
 	log: console.log,
-	path:'/__webpack_hmr',
-	heartbeat: 10 * 1000,
-})
+	path: '/__webpack_hmr',
+	heartbeat: 10 * 1000
+});
 app.use(webpackDevMiddlewareApply(webpackDevMiddleware));
+app.use(
+	assetsMiddleware(compiler, {
+		env: process.env.NODE_ENV,
+		manifestPath: path.join(__dirname, 'build', 'asset-manifest.json')
+	})
+);
 app.use(webpackHotMiddlewareApply(webpackHotMiddleware));
 const getAssetManifest = () => {
-	console.log('path', path.resolve(__dirname, '../build/asset-manifest.json'));
 	try {
-		const content = webpackDevMiddleware.fileSystem.readdirSync(__dirname, '/../build/asset-manifest.json');
+		const content = webpackDevMiddleware.fileSystem.readdirSync(
+			path.resolve(__dirname, '../build/asset-manifest.json')
+		);
 		return JSON.parse(content);
 	} catch (err) {
 		console.log(err);
@@ -32,7 +40,7 @@ const getAssetManifest = () => {
 	}
 };
 // only for server
-const assetMainifest = require(path.resolve(__dirname, '../build/asset-manifest.json'));
+const assetManifest = require(path.resolve(__dirname, '../build/asset-manifest.json'));
 app.use(
 	views(__dirname + '/views', {
 		extension: 'ejs'
@@ -48,12 +56,10 @@ router.get('/a/:id', async (ctx, next) => {
 	console.log(ctx.params.id);
 });
 router.get('*', async (ctx, next) => {
-	// const assetMainifest = getAssetManifest();
-	// console.log(assetMainifest);
 	await ctx.render('index', {
 		title: 'ssr',
 		PUBLIC_URL: '',
-		assetMainifest,
+		assetManifest
 	});
 	next();
 });
