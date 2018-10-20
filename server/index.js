@@ -1,7 +1,6 @@
 const isProd = process.env.NODE_ENV === 'production';
-console.log(isProd);
 const app = isProd ? require('./app.prod.js') : require('./app.dev.js');
-
+console.log(app);
 if (!isProd) {
     process.env.NODE_ENV = 'development';
 }
