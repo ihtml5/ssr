@@ -1,68 +1,89 @@
-const Koa = require('koa');
-const app = new Koa();
+const express = require('express');
 const path = require('path');
-const koaStatic = require('koa-static');
-const views = require('koa-views');
-const Router = require('koa-router');
-const router = new Router();
 const webpack = require('webpack');
-const webpackCfg = require('../config/webpack.config.dev');
-const compiler = webpack(webpackCfg);
-const webpackDevMiddlewareApply = require('./middlewares/webpackDev');
-const webpackHotMiddlewareApply = require('./middlewares/webpackHot');
-const assetsMiddleware = require('./middlewares/assetMainifest');
+const webpackConfig = require('../config/webpack.config.dev.js');
+const compiler = webpack(webpackConfig);
 const webpackDevMiddleware = require('webpack-dev-middleware')(compiler, {
-	noInfo: true,
-	publicPath: webpackCfg.output.publicPath
+	serverSideRender: true,
+	noInfo: true, 
+	publicPath: webpackConfig.output.publicPath
 });
-const webpackHotMiddleware = require('webpack-hot-middleware')(compiler, {
-	log: console.log,
-	path: '/__webpack_hmr',
-	heartbeat: 10 * 1000
-});
-app.use(webpackDevMiddlewareApply(webpackDevMiddleware));
-app.use(
-	assetsMiddleware(compiler, {
-		env: process.env.NODE_ENV,
-		manifestPath: path.join(__dirname, 'build', 'asset-manifest.json')
-	})
-);
-app.use(webpackHotMiddlewareApply(webpackHotMiddleware));
-const getAssetManifest = () => {
-	try {
-		const content = webpackDevMiddleware.fileSystem.readdirSync(
-			path.resolve(__dirname, '../build/asset-manifest.json')
-		);
-		return JSON.parse(content);
-	} catch (err) {
-		console.log(err);
-		return {};
+console.log('output::::', webpackConfig.output.publicPath);
+const isObject = require('is-object');
+function getAssetManifest(res) {
+	const content = res.locals.fs.readFileSync(__dirname + '/../build/asset-manifest.json');
+	return JSON.parse(content);
+}
+function normalizeAssets(assets) {
+	if (assets) {
+		return Object.values(assets);
 	}
-};
-// only for server
-const assetManifest = require(path.resolve(__dirname, '../build/asset-manifest.json'));
+	return Array.isArray(assets) ? assets : [ assets ];
+}
+const app = express();
+
+let assetManifest = null;
+
+app.use(express.static(path.resolve(__dirname, '../build')));
+
+app.use(webpackDevMiddleware);
 app.use(
-	views(__dirname + '/views', {
-		extension: 'ejs'
+	require('webpack-hot-middleware')(compiler, {
+		log: console.log,
+		path: '/__webpack_hmr',
+		heartbeat: 10 * 1000
 	})
 );
-app.use(koaStatic(path.resolve(__dirname, '../build')));
-app.on('error', (err, ctx) => {
-	console.log(err);
-	ctx.body = 'ssr';
+
+app.use('/api/count', (req, res) => {
+	res.json({ count: 100 });
 });
-router.get('/a/:id', async (ctx, next) => {
-	ctx.body = 'STO2018101701472800';
-	console.log(ctx.params.id);
+
+app.get('*', (req, res) => {
+	// console.log('output', res.locals.webpackStats.toJson().assetsByChunkName);
+	// if (!assetManifest) {
+	// 	assetManifest = getAssetManifest(res);
+	// }
+	const assetsByChunkName = res.locals.webpackStats.toJson().assetsByChunkName;
+	const fs = res.locals.fs;
+	console.log(assetsByChunkName);
+	const outputPath = res.locals.webpackStats.toJson().outputPath;
+	// return res.render('index', {
+	// 	title: 'ssr',
+	// 	PUBLIC_URL: '',
+	// 	assetManifest: 
+	// });
+	return res.send(`
+<html>
+  <head>
+    <title>ssr</title>
+    <style>
+		${normalizeAssets(assetsByChunkName.main)
+			.filter((path) => path.endsWith('.css'))
+			.map((path) => fs.readFileSync(outputPath + '/' + path))
+			.join('\n')}
+    </style>
+  </head>
+  <body>
+	<div id="root"></div>
+	${normalizeAssets(assetsByChunkName['runtime~main'])
+		.filter((path) => path.endsWith('.js'))
+		.map((path) => `<script src="${path}"></script>`)
+		.join('\n')}
+	${normalizeAssets(assetsByChunkName['vendors'])
+		.filter((path) => path.endsWith('.js'))
+		.map((path) => `<script src="${path}"></script>`)
+		.join('\n')}
+		${normalizeAssets(assetsByChunkName.main)
+			.filter((path) => path.endsWith('.js'))
+			.map((path) => `<script src="${path}"></script>`)
+			.join('\n')}
+  </body>
+</html>
+  `);
 });
-router.get('*', async (ctx, next) => {
-	await ctx.render('index', {
-		title: 'ssr',
-		PUBLIC_URL: '',
-		assetManifest
-	});
-	next();
-});
-app.use(router.routes());
-app.use(router.allowedMethods());
+
+app.set('view engine', 'ejs');
+app.set('views', path.resolve(__dirname, 'views'));
+
 module.exports = app;

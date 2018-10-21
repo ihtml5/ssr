@@ -1,6 +1,6 @@
 export const TABS = [
     {
-        name: '应用',
+        name: '应用111',
         enName: 'application',
         id: 'mdebug-application'
     },
