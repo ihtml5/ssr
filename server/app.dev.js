@@ -9,12 +9,12 @@ const webpackDevMiddleware = require('webpack-dev-middleware')(compiler, {
   noInfo: true,
   publicPath: webpackConfig.output.publicPath,
 });
-const routes = require('./routes/index');
+// const routes = require('./routes/index');
 const app = express();
 app.use(express.static(path.resolve(__dirname, '../build')));
 app.set('view engine', 'ejs');
 app.set('views', path.resolve(__dirname, 'views'));
-app.use('/', routes);
+// app.use('/ssr', routes);
 
 let assetManifest = null;
 
@@ -26,29 +26,6 @@ app.use(
     heartbeat: 20000,
   }),
 );
-
-app.use('/api/count', (req, res) => {
-  res.json({ count: 100 });
-});
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err,
-    });
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {},
-  });
-});
 app.get('*', (req, res) => {
   if (!assetManifest) {
     assetManifest = getAssetManifest(res);

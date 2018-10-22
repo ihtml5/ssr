@@ -16,11 +16,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
-<<<<<<< HEAD
-const publicPath = '/';
-=======
 const publicPath = 'http://localhost:9000/';
->>>>>>> ff43ded2f0e2ab51f86341c9b3710cadb99d6c30
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing slash as %PUBLIC_PATH%/xyz looks better than %PUBLIC_PATH%xyz.
@@ -109,10 +105,7 @@ module.exports = {
     chunkFilename: 'static/js/[name].chunk.js',
     // This is the URL that app is served from. We use "/" in development.
     publicPath: publicPath,
-<<<<<<< HEAD
-=======
     path: path.join(__dirname, 'public'),
->>>>>>> ff43ded2f0e2ab51f86341c9b3710cadb99d6c30
     // Point sourcemap entries to original disk location (format as URL on Windows)
     devtoolModuleFilenameTemplate: info =>
       path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),

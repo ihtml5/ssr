@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
-import '@/App.css';
-=======
 import './App.css';
->>>>>>> ff43ded2f0e2ab51f86341c9b3710cadb99d6c30
 import { initData } from '@/mock';
 import Inspector from 'react-inspector';
 import { MdebugHeader, MdebugApplication } from '@/modules';
 import { __DEV__ } from '@/utils';
-<<<<<<< HEAD
-=======
 // https://github.com/webpack-contrib/webpack-hot-middleware/issues/105
 import { hot } from 'react-hot-loader';
->>>>>>> ff43ded2f0e2ab51f86341c9b3710cadb99d6c30
 
 class App extends Component {
   constructor(props) {
@@ -68,16 +61,12 @@ class App extends Component {
       >
         <MdebugHeader />
         <MdebugApplication id={'mdebug-application'}>
-          <h1>Mdebug</h1>
+          <h1>Mdebug11</h1>
           <Inspector data={initData} />
         </MdebugApplication>
-<<<<<<< HEAD
-        <MdebugApplication id={'mdebug-system'}>{navigator.userAgent}</MdebugApplication>
-=======
         <MdebugApplication id={'mdebug-system'}>
           {navigator.userAgent}
         </MdebugApplication>
->>>>>>> ff43ded2f0e2ab51f86341c9b3710cadb99d6c30
         <MdebugApplication id={'mdebug-trategy'}>trategy</MdebugApplication>
         <MdebugApplication id={'mdebug-debug'}>debug</MdebugApplication>
         <MdebugApplication id={'mdebug-emonitor'}>emonitor</MdebugApplication>
@@ -86,8 +75,4 @@ class App extends Component {
   }
 }
 
-<<<<<<< HEAD
-export default App;
-=======
 export default hot(module)(App);
->>>>>>> ff43ded2f0e2ab51f86341c9b3710cadb99d6c30

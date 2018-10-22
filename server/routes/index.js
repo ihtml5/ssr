@@ -40,7 +40,8 @@ router.get('*', (req, res) => {
     if (context.status === 302) {
       return res.redirect(302, context.url);
     }
-    res.render('index', {title: 'Express', data: store.getState(), content });
+    res.send('ccc');
+    //res.render('index', {title: 'Express', data: store.getState(), content });
   });
 });
 
