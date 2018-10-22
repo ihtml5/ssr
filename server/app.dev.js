@@ -9,12 +9,12 @@ const webpackDevMiddleware = require('webpack-dev-middleware')(compiler, {
   noInfo: true,
   publicPath: webpackConfig.output.publicPath,
 });
-// const routes = require('./routes/index');
+const routes = require('./routes/index');
 const app = express();
 app.use(express.static(path.resolve(__dirname, '../build')));
 app.set('view engine', 'ejs');
 app.set('views', path.resolve(__dirname, 'views'));
-// app.use('/', routes);
+app.use('/', routes);
 
 let assetManifest = null;
 
