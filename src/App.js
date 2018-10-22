@@ -6,8 +6,6 @@ import { MdebugHeader, MdebugApplication } from '@/modules';
 import { __DEV__ } from '@/utils';
 // https://github.com/webpack-contrib/webpack-hot-middleware/issues/105
 import { hot } from 'react-hot-loader';
-import { Provider } from 'react-redux';
-import store from './store';
 
 class App extends Component {
   constructor(props) {
@@ -77,8 +75,4 @@ class App extends Component {
   }
 }
 
-export default hot(module)(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-);
+export default hot(module)(App);
