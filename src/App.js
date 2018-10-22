@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import '@/App.css';
+import './App.css';
 import { initData } from '@/mock';
 import Inspector from 'react-inspector';
 import { MdebugHeader, MdebugApplication } from '@/modules';
 import { __DEV__ } from '@/utils';
 // https://github.com/webpack-contrib/webpack-hot-middleware/issues/105
-import { hot } from 'react-hot-loader'
+import { hot } from 'react-hot-loader';
+import { Provider } from 'react-redux';
+import store from './store';
 
 class App extends Component {
   constructor(props) {
@@ -64,7 +66,9 @@ class App extends Component {
           <h1>Mdebug</h1>
           <Inspector data={initData} />
         </MdebugApplication>
-        <MdebugApplication id={'mdebug-system'}>{navigator.userAgent}</MdebugApplication>
+        <MdebugApplication id={'mdebug-system'}>
+          {navigator.userAgent}
+        </MdebugApplication>
         <MdebugApplication id={'mdebug-trategy'}>trategy</MdebugApplication>
         <MdebugApplication id={'mdebug-debug'}>debug</MdebugApplication>
         <MdebugApplication id={'mdebug-emonitor'}>emonitor</MdebugApplication>
@@ -73,4 +77,8 @@ class App extends Component {
   }
 }
 
-export default hot(module)(App);
+export default hot(module)(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+);
