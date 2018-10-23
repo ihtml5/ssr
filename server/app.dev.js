@@ -21,17 +21,6 @@ app.use(
 app.use(express.static(path.resolve(__dirname, '../build')));
 app.set('view engine', 'ejs');
 app.set('views', path.resolve(__dirname, 'views'));
-app.use('/ssr', routes);
-app.get('*', (req, res) => {
-  if (!assetManifest) {
-    assetManifest = getAssetManifest(res);
-  }
-  return res.render('index', {
-    title: 'muso-ssr',
-    PUBLIC_URL: '',
-    isProd: false,
-    assetManifest,
-  });
-});
+app.use('*', routes);
 
 module.exports = app;

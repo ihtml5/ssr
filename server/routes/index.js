@@ -1,28 +1,20 @@
-import express from 'express';
-
-import React, { Component } from 'react';
+import { Router } from 'express';
+import React from 'react';
 import { renderToString } from 'react-dom/server';
 const { getAssetManifest } = require('../utils');
 import StaticRouter from 'react-router-dom/StaticRouter';
 import { matchRoutes, renderRoutes } from 'react-router-config';
-
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-
 import routes from '../../src/routes';
 import reducers from '../../src/reducers';
 
-/*eslint-disable*/
-const router = express.Router();
-
+const router = Router();
 let assetManifest = null;
-/*eslint-enable*/
-
 const store = createStore(reducers, applyMiddleware(thunk));
 
-router.get('*', (req, res, next) => {
-	console.log('*');
+router.get('*', (req, res) => {
 	const branch = matchRoutes(routes, req.url);
 	const promises = branch.map(({ route }) => {
 		let fetchData = route.component.fetchData;
@@ -30,10 +22,10 @@ router.get('*', (req, res, next) => {
 	});
 	return Promise.all(promises).then((data) => {
 		let context = {};
-		const content = renderToString(
+		const appHtml = renderToString(
 			<Provider store={store}>
 				<StaticRouter location={req.url} context={context}>
-					{renderRoutes(routes, { ...data })}
+          {renderRoutes(routes)}
 				</StaticRouter>
 			</Provider>
 		);
@@ -42,18 +34,17 @@ router.get('*', (req, res, next) => {
 		}
 		if (context.status === 302) {
 			return res.redirect(302, context.url);
-    }
-    if (!assetManifest) {
-      assetManifest = getAssetManifest(res);
-    }
-		// res.send('ccc');
+		}
+		if (!assetManifest) {
+			assetManifest = getAssetManifest(res);
+		}
 		res.render('index', {
 			title: 'muso-ssr',
 			PUBLIC_URL: '',
 			isProd: process.env.NODE_ENV === 'production',
 			assetManifest,
 			data: store.getState(),
-			appHtml: content
+			appHtml
 		});
 	});
 });
