@@ -65,7 +65,7 @@ class App extends Component {
           <Inspector data={initData} />
         </MdebugApplication>
         <MdebugApplication id={'mdebug-system'}>
-          {navigator.userAgent}
+          navigator
         </MdebugApplication>
         <MdebugApplication id={'mdebug-trategy'}>trategy</MdebugApplication>
         <MdebugApplication id={'mdebug-debug'}>debug</MdebugApplication>

@@ -3,21 +3,13 @@ const path = require('path');
 const webpack = require('webpack');
 const webpackConfig = require('../config/webpack.config.dev.js');
 const compiler = webpack(webpackConfig);
-const { getAssetManifest } = require('./utils');
 const webpackDevMiddleware = require('webpack-dev-middleware')(compiler, {
   serverSideRender: true,
   noInfo: true,
   publicPath: webpackConfig.output.publicPath,
 });
-// const routes = require('./routes/index');
+const routes = require('./routes/index');
 const app = express();
-app.use(express.static(path.resolve(__dirname, '../build')));
-app.set('view engine', 'ejs');
-app.set('views', path.resolve(__dirname, 'views'));
-// app.use('/ssr', routes);
-
-let assetManifest = null;
-
 app.use(webpackDevMiddleware);
 app.use(
   require('webpack-hot-middleware')(compiler, {
@@ -26,6 +18,10 @@ app.use(
     heartbeat: 20000,
   }),
 );
+app.use(express.static(path.resolve(__dirname, '../build')));
+app.set('view engine', 'ejs');
+app.set('views', path.resolve(__dirname, 'views'));
+app.use('/ssr', routes);
 app.get('*', (req, res) => {
   if (!assetManifest) {
     assetManifest = getAssetManifest(res);
