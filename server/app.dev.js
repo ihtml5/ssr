@@ -31,7 +31,7 @@ app.get('*', (req, res) => {
     assetManifest = getAssetManifest(res);
   }
   return res.render('index', {
-    title: 'ssr-express',
+    title: 'muso-ssr',
     PUBLIC_URL: '',
     isProd: false,
     assetManifest,
