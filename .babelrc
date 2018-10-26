@@ -1,0 +1,26 @@
+{
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      ["@babel/plugin-proposal-decorators", { "legacy": true }],
+      [
+        "@babel/plugin-transform-runtime",
+        {
+          "helpers": false,
+          "regenerator": true
+        }
+      ],
+      [
+        "module-resolver",
+        {
+          "cwd": "babelrc",
+          "root": ["./src"],
+          "alias": {
+            "@": "./src"
+          }
+        }
+      ]
+    ]
+  }
