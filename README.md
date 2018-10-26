@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # ssr
 ssr is based on the latest js development framework, providing hot updates, isomorphic rendering, etc.
 
@@ -23,11 +24,16 @@ ssr is based on the latest js development framework, providing hot updates, isom
 > 相关文章
 
 =======
+=======
+>>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
 
 # ssr
 Build server-side rendering with nodejs
 
 ## Articles
+<<<<<<< HEAD
+>>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
+=======
 >>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
 1. [使用next.js完成从开发到部署](https://juejin.im/post/5b08078b51882538ad3f163d)
 2. [使用Next.js构建React服务端渲染应用](https://segmentfault.com/a/1190000015578803)
@@ -35,12 +41,17 @@ Build server-side rendering with nodejs
 4. [Building Server-rendered React Apps with NextJS](https://medium.com/@tilomitra/building-server-rendered-react-apps-with-nextjs-40313e978cb4)
 5. [koa2 + webpack 热更新](https://www.cnblogs.com/liuyt/p/7217024.html)
 <<<<<<< HEAD
+<<<<<<< HEAD
 6. [Running React Router v4, Redux Saga, SSR and Code Splitting together](https://marmelab.com/blog/2017/10/17/code-splitting.html)
 7. [苏宁Nodejs性能优化实战](http://www.infoq.com/cn/articles/suning-nodejs-performance-optimization)
 
 ## 四、Projects
 > 相关项目
 
+=======
+
+## Projects
+>>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
 =======
 
 ## Projects

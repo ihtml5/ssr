@@ -5,8 +5,13 @@ import Inspector from 'react-inspector';
 import { MdebugHeader, MdebugApplication } from '@/modules';
 import { __DEV__ } from '@/utils';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { hot } from 'react-hot-loader';
 // https://github.com/webpack-contrib/webpack-hot-middleware/issues/105
+=======
+// https://github.com/webpack-contrib/webpack-hot-middleware/issues/105
+import { hot } from 'react-hot-loader';
+>>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
 =======
 // https://github.com/webpack-contrib/webpack-hot-middleware/issues/105
 import { hot } from 'react-hot-loader';
@@ -67,7 +72,11 @@ class App extends Component {
         <MdebugHeader />
         <MdebugApplication id={'mdebug-application'}>
 <<<<<<< HEAD
+<<<<<<< HEAD
           <h1>Mdebug</h1>
+=======
+          <h1>Mdebug11</h1>
+>>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
 =======
           <h1>Mdebug11</h1>
 >>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52

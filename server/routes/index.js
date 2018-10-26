@@ -16,6 +16,7 @@ const store = createStore(reducers, applyMiddleware(thunk));
 
 router.get('*', (req, res) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
   const branch = matchRoutes(routes, req.url);
   const promises = branch.map(({ route }) => {
     let fetchData = route.component.fetchData;
@@ -52,6 +53,8 @@ router.get('*', (req, res) => {
     });
   });
 =======
+=======
+>>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
 	const branch = matchRoutes(routes, req.url);
 	const promises = branch.map(({ route }) => {
 		let fetchData = route.component.fetchData;
@@ -84,6 +87,9 @@ router.get('*', (req, res) => {
 			appHtml
 		});
 	});
+<<<<<<< HEAD
+>>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
+=======
 >>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
 });
 

@@ -2,10 +2,13 @@ require('ignore-styles');
 require("@babel/register");
 require('@babel/polyfill');
 <<<<<<< HEAD
+<<<<<<< HEAD
 // const hook = require('css-modules-require-hook');
 // hook({
 //   generateScopedName: '[name]__[local]___[hash:base64:5]',
 // });
+=======
+>>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
 =======
 >>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
 // https://stackoverflow.com/questions/47441428/why-cant-i-import-css-files-for-my-react-server-side-rendering-app
@@ -21,7 +24,11 @@ if (!isProd) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const PROT = process.env.PROT || 3000;
+=======
+const PROT = process.env.PROT || 9000;
+>>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
 =======
 const PROT = process.env.PROT || 9000;
 >>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52

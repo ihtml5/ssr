@@ -15,7 +15,10 @@
     "chalk": "2.4.1",
     "css-loader": "0.28.11",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "css-modules-require-hook": "^4.2.3",
+=======
+>>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
 =======
 >>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
     "dotenv": "5.0.1",
@@ -78,8 +81,12 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "server": "NODE_ENV=development PROT=9000 node server/index.js",
     "prod": "NODE_ENV=development PROT=9000 pm2 start server/index.js"
+=======
+    "server": "NODE_ENV=development node server/index.js"
+>>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
 =======
     "server": "NODE_ENV=development node server/index.js"
 >>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52

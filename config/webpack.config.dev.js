@@ -17,8 +17,12 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
 <<<<<<< HEAD
+<<<<<<< HEAD
 // const publicPath = 'http://localhost:9000/';
 const publicPath = '/';
+=======
+const publicPath = 'http://localhost:9000/';
+>>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
 =======
 const publicPath = 'http://localhost:9000/';
 >>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
@@ -80,6 +84,10 @@ module.exports = {
   // The first two entry points enable "hot" CSS and auto-refreshes for JS.
   entry: [
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+>>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
 =======
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
 >>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
@@ -98,7 +106,11 @@ module.exports = {
     // require.resolve('react-dev-utils/webpackHotDevClient'),
     // Finally, this is your app's code:
 <<<<<<< HEAD
+<<<<<<< HEAD
     paths.appRootJs,
+=======
+    paths.appIndexJs,
+>>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
 =======
     paths.appIndexJs,
 >>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
