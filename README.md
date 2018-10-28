@@ -21,13 +21,16 @@ ssr is based on the latest js development framework, providing hot updates, isom
 ## 三、Articles
 > 相关文章
 
-1. [使用next.js完成从开发到部署](https://juejin.im/post/5b08078b51882538ad3f163d)
-2. [使用Next.js构建React服务端渲染应用](https://segmentfault.com/a/1190000015578803)
-3. [服务端渲染与 Universal React App](https://zhuanlan.zhihu.com/p/30580569)
-4. [Building Server-rendered React Apps with NextJS](https://medium.com/@tilomitra/building-server-rendered-react-apps-with-nextjs-40313e978cb4)
-5. [koa2 + webpack 热更新](https://www.cnblogs.com/liuyt/p/7217024.html)
-6. [Running React Router v4, Redux Saga, SSR and Code Splitting together](https://marmelab.com/blog/2017/10/17/code-splitting.html)
-7. [苏宁Nodejs性能优化实战](http://www.infoq.com/cn/articles/suning-nodejs-performance-optimization)
+1. [服务端渲染与 Universal React App](https://zhuanlan.zhihu.com/p/30580569)
+2. [Building Server-rendered React Apps with NextJS](https://medium.com/@tilomitra/building-server-rendered-react-apps-with-nextjs-40313e978cb4)
+3. [koa2 + webpack 热更新](https://www.cnblogs.com/liuyt/p/7217024.html)
+4. [Running React Router v4, Redux Saga, SSR and Code Splitting together](https://marmelab.com/blog/2017/10/17/code-splitting.html)
+5. [苏宁Nodejs性能优化实战](http://www.infoq.com/cn/articles/suning-nodejs-performance-optimization)
+6. [beidou articles](https://github.com/alibaba/beidou/blob/master/packages/beidou-docs/articles/high-performance-isomorphic-app.md)
+7. [nodejs guides](https://nodejs.org/en/docs/guides/)
+8. [使用next.js完成从开发到部署](https://juejin.im/post/5b08078b51882538ad3f163d)
+9. [使用Next.js构建React服务端渲染应用](https://segmentfault.com/a/1190000015578803)
+
 
 ## 四、Projects
 > 相关项目
