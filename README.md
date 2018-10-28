@@ -1,5 +1,5 @@
 # ssr
-ssr is based on the latest js development framework, providing hot updates, isomorphic rendering, etc.
+基于create-react-app 2.0等最新前端技术框架的react同构渲染模版，支持热更新，redux等.
 
 ## 一、Usage
 > 1. 客户端渲染启动方式  2. 服务端渲染启动方式
