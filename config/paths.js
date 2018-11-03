@@ -47,13 +47,7 @@ module.exports = {
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
   appIndexJs: resolveApp('src/index.js'),
-<<<<<<< HEAD
-<<<<<<< HEAD
   appRootJs: resolveApp('src/root.js'),
-=======
->>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
-=======
->>>>>>> 6dbd155f51f65cda4c55cab4ce85e0d17859fa52
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   testsSetup: resolveApp('src/setupTests.js'),
