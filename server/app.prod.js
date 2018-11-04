@@ -1,30 +1,10 @@
-const Koa = require('koa');
-const app = new Koa();
+const express = require('express');
 const path = require('path');
-const koaStatic = require('koa-static');
-const views = require('koa-views');
-const Router = require('koa-router');
-const router = new Router();
+const routes = require('./routes/index');
+const app = express();
 
-const assetMainifest = require(path.resolve(__dirname, '../build/asset-manifest.json'));
-app.use(koaStatic(path.resolve(__dirname, '../build')));
-app.on('error', (err, ctx) => {
-	console.log(err);
-});
-console.log(__dirname + '/views');
-app.use(
-	views(__dirname + '/views', {
-		extension: 'ejs'
-	})
-);
-router.get('*', async (ctx, next) => {
-	await ctx.render('index', {
-		title: 'ssr',
-		PUBLIC_URL: '',
-		assetMainifest
-	});
-	next();
-});
-app.use(router.routes());
-app.use(router.allowedMethods());
+app.use(express.static(path.resolve(__dirname, '../build')));
+app.set('view engine', 'ejs');
+app.set('views', path.resolve(__dirname, 'views'));
+app.use('/', routes);
 module.exports = app;

@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import React from 'react';
+import path from 'path';
 import { renderToString } from 'react-dom/server';
 const { getAssetManifest } = require('../utils');
 import StaticRouter from 'react-router-dom/StaticRouter';
@@ -10,8 +11,10 @@ import thunk from 'redux-thunk';
 import routes from '../../src/routes';
 import reducers from '../../src/reducers';
 
+const assetManifestForProd = require(path.resolve(__dirname, '../../build/asset-manifest.json'));
 const router = Router();
 let assetManifest = null;
+const isProd = process.env.NODE_ENV === 'production';
 const store = createStore(reducers, applyMiddleware(thunk));
 
 router.get('*', (req, res) => {
@@ -22,7 +25,7 @@ router.get('*', (req, res) => {
       ? fetchData(store)
       : Promise.resolve(null);
   });
-  console.warn('req.url', req.url);
+  console.warn('req.url', req.url, store.getState());
   return Promise.all(promises).then(data => {
     let context = {};
     const appHtml = renderToString(
@@ -39,12 +42,12 @@ router.get('*', (req, res) => {
       return res.redirect(302, context.url);
     }
     if (!assetManifest) {
-      assetManifest = getAssetManifest(res);
+      assetManifest = isProd ? assetManifestForProd : getAssetManifest(res);
     }
     res.render('index', {
-      title: 'muso-ssr',
+      title: isProd ? 'muso-ssr-prod' : 'muso-ssr',
       PUBLIC_URL: '',
-      isProd: process.env.NODE_ENV === 'production',
+      isProd,
       assetManifest,
       data: store.getState(),
       appHtml,

@@ -1,5 +1,9 @@
 const isObject = obj => Object.prototype.toString.call(obj) === '[object Object]';
+const isProd = process.env.NODE_ENV === 'production';
 function getAssetManifest(res) {
+	if (isProd) {
+		return {};
+	}
 	const assetsByChunkName = res.locals.webpackStats.toJson().assetsByChunkName;
 	return {
 		['main.js']: normalizeAssets(assetsByChunkName.main).filter((path) => path.endsWith('.js'))[0],

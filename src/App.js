@@ -61,7 +61,6 @@ class App extends Component {
       >
         <MdebugHeader />
         <MdebugApplication id={'mdebug-application'}>
-          <h1>Mdebug</h1>
           <h1>Mdebug11</h1>
           <Inspector data={initData} />
         </MdebugApplication>
