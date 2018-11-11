@@ -11,7 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showDebug: __DEV__,
+      showDebug: true,
     };
     this._times = 1;
     this._lastTapTime = null;
@@ -75,4 +75,6 @@ class App extends Component {
   }
 }
 
-export default hot(module)(App);
+
+const WrapedApp = __DEV__ ? hot(module)(App) : App;
+export default WrapedApp;

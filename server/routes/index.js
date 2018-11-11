@@ -25,7 +25,7 @@ router.get('*', (req, res) => {
       ? fetchData(store)
       : Promise.resolve(null);
   });
-  console.warn('req.url', req.url, store.getState());
+  console.log('req.url', req.url);
   return Promise.all(promises).then(data => {
     let context = {};
     const appHtml = renderToString(
@@ -44,6 +44,7 @@ router.get('*', (req, res) => {
     if (!assetManifest) {
       assetManifest = isProd ? assetManifestForProd : getAssetManifest(res);
     }
+    // let template = fs.readFileSync(path.resolve(__dirname, '../../build/index.html'), 'utf-8');
     res.render('index', {
       title: isProd ? 'muso-ssr-prod' : 'muso-ssr',
       PUBLIC_URL: '',
