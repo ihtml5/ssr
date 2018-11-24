@@ -62,7 +62,7 @@ class App extends Component {
         <MdebugHeader />
         <MdebugApplication id={'mdebug-application'}>
           <h1>Mdebug11</h1>
-          <Inspector data={initData} />
+          <Inspector data={process.browser ? window.__initData : {}} />
         </MdebugApplication>
         <MdebugApplication id={'mdebug-system'}>
           { process.browser && window.navigator.userAgent}

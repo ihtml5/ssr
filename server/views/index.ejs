@@ -14,6 +14,13 @@
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"><%- appHtml %></div>
+    <script>
+      // 如何获取数据
+      window.__initComment = JSON.parse('<%- JSON.stringify(initComment) %>');
+      window.__initData = JSON.parse('<%- JSON.stringify(initData) %>');
+      console.log(window.__initComment);
+      console.log(window.__initData);
+    </script>
     <script src="<%= PUBLIC_URL + assetManifest['runtime~main.js'] %>"></script>
     <script src="<%= PUBLIC_URL + assetManifest['vendors.js'] %>"></script>
     <script src="<%= PUBLIC_URL + assetManifest['main.js'] %>"></script>
