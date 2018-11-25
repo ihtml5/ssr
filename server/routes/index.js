@@ -19,19 +19,19 @@ const isProd = process.env.NODE_ENV === 'production';
 const store = createStore(reducers, applyMiddleware(thunk));
 
 router.get('*', async (req, res) => {
-  const branch = matchRoutes(routes, req.url);
-  let initComment = null;
-  let initData = null;
+	const branch = matchRoutes(routes, req.url);
+	let initComment = null;
+	let initData = null;
 	if (req.url.indexOf('/ssr') !== -1) {
-		initComment = await fetch('url1').then(res => res.json());
-		initData = await fetch('url2').then(res => res.json());
+		initComment = await fetch('url1').then((res) => res.json());
+		initData = await fetch('url2').then((res) => res.json());
 		console.log('initCommnet', initComment, typeof initComment);
 	}
 	const promises = branch.map(({ route }) => {
 		let fetchData = route.component.fetchData;
 		return fetchData instanceof Function ? fetchData(store) : Promise.resolve(null);
 	});
-	return Promise.all(promises).then(data => {
+	return Promise.all(promises).then((data) => {
 		let context = {};
 		const appHtml = renderToString(
 			<Provider store={store}>
@@ -55,9 +55,9 @@ router.get('*', async (req, res) => {
 			isProd,
 			assetManifest,
 			data: store.getState(),
-      appHtml,
-      initComment,
-      initData,
+			appHtml,
+			initComment,
+			initData
 		});
 	});
 });
