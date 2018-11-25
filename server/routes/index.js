@@ -23,15 +23,9 @@ router.get('*', async (req, res) => {
   let initComment = null;
   let initData = null;
 	if (req.url.indexOf('/ssr') !== -1) {
-		initComment = await fetch(
-			'https://view.inews.qq.com/getQQNewsComment?comment_id=3225403003&from=share&lcount=6&v=1542983392812&addNew=0&uniqueid=ukey_154298339222813714&tbkt=E'
-		)
-      .then(res => res.json());
-    initData = await fetch(
-			'http://test.view.inews.qq.com/getWXNewsContent?id=20171129V077OD00&path=a&tbkt=B1&openid=&app=news'
-		)
-      .then(res => res.json());
-    console.log('initCommnet', initComment, typeof initComment);
+		initComment = await fetch('url1').then(res => res.json());
+		initData = await fetch('url2').then(res => res.json());
+		console.log('initCommnet', initComment, typeof initComment);
 	}
 	const promises = branch.map(({ route }) => {
 		let fetchData = route.component.fetchData;

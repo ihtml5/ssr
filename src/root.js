@@ -7,7 +7,7 @@ import { renderRoutes } from 'react-router-config';
 import routes from './routes';
 import store from './store';
 hydrate(
-  <Provider store={store}>
+  <Provider store={store} suppressHydrationWarning={true}>
     <BrowserRouter>{renderRoutes(routes)}</BrowserRouter>
   </Provider>,
   document.getElementById('root'),

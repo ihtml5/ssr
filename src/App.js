@@ -50,6 +50,9 @@ class App extends Component {
       }
     });
   }
+  componentDidMount() {
+    console.log('didMount', process.browser ? initData : window.__initData);
+  }
   render() {
     const { showDebug } = this.state;
     return (
@@ -62,7 +65,7 @@ class App extends Component {
         <MdebugHeader />
         <MdebugApplication id={'mdebug-application'}>
           <h1>Mdebug11</h1>
-          <Inspector data={process.browser ? window.__initData : {}} />
+          <Inspector data={process.browser ? initData : window.__initDatar} />
         </MdebugApplication>
         <MdebugApplication id={'mdebug-system'}>
           { process.browser && window.navigator.userAgent}
